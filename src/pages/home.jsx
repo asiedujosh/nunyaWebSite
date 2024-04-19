@@ -7,6 +7,7 @@ import HeroBanner from "../components/herobanner"
 import AboutSection from "../components/AboutSection"
 import ThirdSection from "../components/ThirdSection"
 import FourthSection from "../components/FourthSection"
+import TestimonialSection from "../components/TestimonialSection"
 import DownloadBtnContainer from "../components/downloadBtnContainer"
 import Footer from "../components/Footer"
 
@@ -31,7 +32,7 @@ const Home = () => {
       </div>
       <AboutSection />
       <ThirdSection />
-      <FourthSection />
+      <TestimonialSection />
     </>
   )
 }

@@ -9,6 +9,8 @@ const Navbar = () => {
 
   const navigate = useNavigate()
 
+  console.log(userProfile)
+
   useEffect(() => {
     if (!alreadyLoggedIn) {
       navigate("/")
@@ -25,13 +27,15 @@ const Navbar = () => {
       <div className="flex items-center">
         <div className="mr-4">
           <span className="text-xl font-bold">
-            {userProfile
-              ? `Welcome ${
-                  userProfile.data
-                    ? userProfile.data.username
-                    : userProfile.username
-                }`
-              : "Nunya Exams"}
+            {!alreadyLoggedIn ? (
+              <Link to="">Nunya Exams</Link>
+            ) : userProfile &&
+              (userProfile.username ||
+                (userProfile.data && userProfile.data.username)) ? (
+              `Welcome ${userProfile.username || userProfile.data.username}`
+            ) : (
+              <Link to="">Nunya Exams</Link>
+            )}
           </span>
         </div>
       </div>
@@ -46,16 +50,21 @@ const Navbar = () => {
           <Link to="/termsAndCondition" className="text-gray-400 mr-4">
             T&C
           </Link>
-          <button className="text-gray-400 hover:text-white mr-4">Store</button>
+          <button className="text-gray-400 hover:text-white mr-4">
+            Contact
+          </button>
 
-          {userProfile && userProfile.data.username && (
-            <button
-              className="text-gray-400 hover:text-white"
-              onClick={() => handleLogout()}
-            >
-              Logout
-            </button>
-          )}
+          {alreadyLoggedIn &&
+            userProfile &&
+            (userProfile.username ||
+              (userProfile.data && userProfile.data.username)) && (
+              <button
+                className="text-gray-400 hover:text-white"
+                onClick={() => handleLogout()}
+              >
+                Logout
+              </button>
+            )}
         </div>
       </div>
     </div>
