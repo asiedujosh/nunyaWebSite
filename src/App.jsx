@@ -27,6 +27,7 @@ import Purchase from "./pages/purchase"
 import GameResult from "./pages/gameResult"
 import Review from "./pages/review"
 import Free from "./pages/free"
+import ComingSoon from "./pages/comingSoon"
 
 function App() {
   return (
@@ -37,6 +38,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/team" element={<Team />} />
+          <Route path="/comingSoon" element={<ComingSoon />} />
           <Route path="/termsAndCondition" element={<TermsAndCondition />} />
           <Route path="/dashboard" element={<Dashboard />}>
             <Route path="/dashboard" element={<DashboardHome />} />

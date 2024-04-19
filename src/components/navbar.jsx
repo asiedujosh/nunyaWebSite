@@ -47,12 +47,15 @@ const Navbar = () => {
             T&C
           </Link>
           <button className="text-gray-400 hover:text-white mr-4">Store</button>
-          <button
-            className="text-gray-400 hover:text-white"
-            onClick={() => handleLogout()}
-          >
-            Logout
-          </button>
+
+          {userProfile && userProfile.data.username && (
+            <button
+              className="text-gray-400 hover:text-white"
+              onClick={() => handleLogout()}
+            >
+              Logout
+            </button>
+          )}
         </div>
       </div>
     </div>

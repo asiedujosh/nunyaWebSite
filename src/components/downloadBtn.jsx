@@ -1,14 +1,15 @@
 import React from "react"
+import { Link, useNavigate } from "react-router-dom"
 import playStoreLogo from "../assets/app-logo/googleBtn.png"
 import appleStoreLogo from "../assets/app-logo/appleBtnOne.png"
 
-const DownloadButton = ({ store }) => {
+const DownloadButton = ({ store, location }) => {
   // Function to handle button click, redirecting to the respective store
   const handleDownload = () => {
     // Replace the URL with your app's actual download link on Google Play Store or App Store
     window.open(
       store === "google"
-        ? "https://play.google.com/store"
+        ? "https://play.google.com/store/apps/details?id=com.nunyae.schoolapp"
         : "https://www.apple.com/app-store/"
     )
   }
@@ -27,6 +28,7 @@ const DownloadButton = ({ store }) => {
             className="h-6"
             style={{ width: "300px", height: "120px" }}
           />
+          <h4></h4>
         </>
       ) : (
         <>

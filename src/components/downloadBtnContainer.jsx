@@ -7,9 +7,13 @@ const DownloadBtnContainer = () => {
       <h3 className="text-5xl text-white font-bold mb-4">Nunya Exams</h3>
       <p className="text-3xl mb-4 text-white">available on</p>
       <div>
-        <DownloadButton store="google" />
-        <DownloadButton store="apple" />
+        <DownloadButton
+          store="google"
+          location="https://play.google.com/store/apps/details?id=com.nunyae.schoolapp"
+        />
+        <DownloadButton store="apple" location="/comingSoon" />
       </div>
+      <h4 className="text-3xl mb-4 text-white">Coming soon on App Store</h4>
     </div>
   )
 }
