@@ -25,14 +25,14 @@ const AboutSection = () => {
         {/* Card 3 */}
         <AboutCard
           imageData={ImageThree}
-          title="West African Examinations Council Certificate Examination"
-          content="The West African Examinations Council Senior Secondary Certificate Examination. It is a standardized test taken by students in their final year of senior secondary school education in West African countries such as Nigeria, Ghana, Sierra Leone, Liberia, and The Gambia. The exam typically covers a wide range of subjects and is an important requirement for students seeking admission into tertiary institutions or pursuing other career paths."
+          title="Checkpoint Exams"
+          content="Checkpoint exams are assessments conducted by the Cambridge Assessment International Education for students typically in the middle of secondary education, around the age of 14. These exams are part of the Cambridge Lower Secondary program and are taken in subjects like English, mathematics, and science. They serve as a checkpoint to assess students’ progress and readiness for the next stage of their education."
         />
         {/* Card 4 */}
         <AboutCard
           imageData={ImageFour}
-          title="Checkpoint exams"
-          content="Checkpoint exams are assessments conducted by the Cambridge Assessment International Education for students typically in the middle of secondary education, around the age of 14. These exams are part of the Cambridge Lower Secondary program and are taken in subjects like English, mathematics, and science. They serve as a checkpoint to assess students’ progress and readiness for the next stage of their education."
+          title="West African Examinations Council Certificate Examination"
+          content="The West African Examinations Council Senior Secondary Certificate Examination. It is a standardized test taken by students in their final year of senior secondary school education in West African countries such as Nigeria, Ghana, Sierra Leone, Liberia, and The Gambia. The exam typically covers a wide range of subjects and is an important requirement for students seeking admission into tertiary institutions or pursuing other career paths."
         />
       </div>
     </div>

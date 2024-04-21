@@ -21,7 +21,7 @@ const ThirdSection = () => {
 
       {/* Sign-in Card */}
       <div
-        className="container mx-auto z-30"
+        className="container mx-auto z-30 "
         style={{ height: "48vh", width: "1000px" }}
       >
         <img src={ScreenShot} alt="Placeholder" className="w-full" />

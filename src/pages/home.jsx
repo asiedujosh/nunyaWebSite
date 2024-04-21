@@ -6,8 +6,10 @@ import SmallDownloadBtnContainer from "../components/smallDloadBtnContainer"
 import HeroBanner from "../components/herobanner"
 import AboutSection from "../components/AboutSection"
 import ThirdSection from "../components/ThirdSection"
+import ServiceSection from "../components/ServiceSection"
 import FourthSection from "../components/FourthSection"
 import TestimonialSection from "../components/TestimonialSection"
+import PaymentSection from "../components/paymentModeSection"
 import DownloadBtnContainer from "../components/downloadBtnContainer"
 import Footer from "../components/Footer"
 
@@ -31,7 +33,9 @@ const Home = () => {
         <SmallDownloadBtnContainer />
       </div>
       <AboutSection />
+      <ServiceSection />
       <ThirdSection />
+      <PaymentSection />
       <TestimonialSection />
     </>
   )
