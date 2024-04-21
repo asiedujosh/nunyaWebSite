@@ -1,4 +1,5 @@
 import React from "react"
+import { Link, useNavigate } from "react-router-dom"
 
 const Footer = () => {
   return (
@@ -6,15 +7,15 @@ const Footer = () => {
       <div className="container mx-auto flex justify-between items-center">
         <p className="text-sm">&copy; 2024 Nunya Exams. All rights reserved.</p>
         <div className="flex space-x-4">
-          <a href="#" className="hover:text-gray-300">
+          <Link to="/about" className="hover:text-gray-300">
             About Us
-          </a>
-          <a href="#" className="hover:text-gray-300">
+          </Link>
+          <Link to="/contact" className="hover:text-gray-300">
             Contact
-          </a>
-          <a href="#" className="hover:text-gray-300">
+          </Link>
+          <Link to="/termsAndCondition" className="hover:text-gray-300">
             Privacy Policy
-          </a>
+          </Link>
         </div>
       </div>
     </footer>

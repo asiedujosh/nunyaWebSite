@@ -1,63 +1,56 @@
 import HeroAboutBanner from "../components/heroAboutBanner"
+import ServiceSection from "../components/ServiceSection"
 
 const About = () => {
   return (
     <>
       <HeroAboutBanner title="About" />
-      <div className="max-w-4xl mx-auto px-4 py-8">
-        <h1 className="text-3xl font-bold mb-4">About Nunya Exams</h1>
-        <p className="text-lg mb-6">
-          Our vision as an online exam app is to create a seamless and
-          user-friendly platform that facilitates efficient and secured online
-          exams. The app will be designed to meet the needs of both students and
-          educators, and will incorporate the latest technology to ensure that
-          the online exam experience is engaging, effective and fair.
-        </p>
-        <h2 className="text-2xl font-bold mb-4">Key Features</h2>
-        <ul className="list-disc pl-6 mb-6">
-          <li>
-            Secure authentication and identity verification - The app will
-            incorporate robust security features to ensure that students and/or
-            educators are accurately authenticated and verified before taking
-            the exam. This will include features such as facial recognition,
-            two-factor authentication and biometric verification.
-          </li>
-          <li>
-            Customizable exam creation and management - The app will provide
-            educators with the ability to create and manage exams with ease.
-            This will include features such as question banks, curated exam
-            templates, and the ability to set specific exam parameters such as
-            time limits and access controls.
-          </li>
-          <li>
-            Automated grading and reporting - The app will incorporate
-            intelligent algorithms to automatically grade exams and generate
-            detailed reports. This will save educators time and provide them
-            with actionable insights into student performance.
-          </li>
-          <li>
-            Interactive exam experience - The app will provide students with a
-            rich and interactive exam experience that is engaging and intuitive.
-            This will include features such as interactive questions, multimedia
-            content, and the ability to ask questions and receive feedback in
-            real-time.
-          </li>
-          <li>
-            Seamless integration with learning management systems - The app will
-            seamlessly integrate with popular learning management systems (LMS),
-            making it easy for educators to manage exams and for students to
-            access their results and feedback.
-          </li>
-        </ul>
-        <p className="text-lg mb-6">
-          Our goal is to create an online exam app that is reliable, secure and
-          effective, and that meets the needs of both educators and students. By
-          leveraging the latest technology and incorporating innovative
-          features, we believe that our app (Nunya Exams) will transform the
-          online exam experience and provide educators with a powerful tool to
-          enhance student learning and performance.
-        </p>
+
+      <div className="container mx-auto py-16 px-4 md:px-0">
+        <div className="flex flex-col">
+          <div>
+            <p className="text-lg mb-8">
+              Nunya Exams is a leading provider of online exam preparation
+              resources, helping students worldwide prepare for a variety of
+              academic and professional exams. Our mission is to empower
+              learners to achieve their goals and unlock their full potential by
+              providing high-quality, comprehensive study materials and
+              personalized support.
+            </p>
+            <p className="text-lg mb-8">
+              Since our founding in 2023, we have helped thousands of students
+              succeed in their exams and reach their academic and career goals.
+              Our team of experienced educators and exam experts are dedicated
+              to creating engaging, effective study materials that cater to a
+              variety of learning styles and preferences.
+            </p>
+
+            <p className="text-lg mb-8">
+              We offer a wide range of exam prep resources, including practice
+              tests, study guides, video lessons, and interactive quizzes. Our
+              materials cover a diversity of subjects and exams, including
+              standardized tests such as Cambridge IGCSE, Cambridge O Level,
+              Cambridge International AS & A Levels, BECE, and WASSCE, as well
+              as other professional exams.
+            </p>
+            <p className="text-lg mb-8">
+              At Nunya Exams, we believe that exam preparation should be
+              accessible and affordable for all students. That is why we offer
+              flexible pricing options and free resources, such as study tips
+              and test-taking strategies, to help students make the most of
+              their study time.
+            </p>
+            <p className="text-lg mb-8">
+              Whether you're a high school student preparing for your college
+              entrance exams or a working professional looking to advance your
+              career, Nunya Exams has the resources and support you need to
+              succeed. Thank you for choosing us as your exam preparation
+              partner, and we look forward to having you on board.
+            </p>
+          </div>
+        </div>
       </div>
+      <ServiceSection />
     </>
   )
 }

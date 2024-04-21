@@ -41,18 +41,21 @@ const Navbar = () => {
       </div>
       <div>
         <div className="flex">
-          <Link to="/about" className="text-gray-400 mr-4">
+          <Link to="/about" className="text-gray-400  hover:text-white mr-4">
             About
           </Link>
-          <Link to="/team" className="text-gray-400 mr-4">
+          <Link to="/team" className="text-gray-400  hover:text-white mr-4">
             Team
           </Link>
-          <Link to="/termsAndCondition" className="text-gray-400 mr-4">
+          <Link
+            to="/termsAndCondition"
+            className="text-gray-400  hover:text-white mr-4"
+          >
             T&C
           </Link>
-          <button className="text-gray-400 hover:text-white mr-4">
+          <Link to="/contact" className="text-gray-400  hover:text-white mr-4">
             Contact
-          </button>
+          </Link>
 
           {alreadyLoggedIn &&
             userProfile &&

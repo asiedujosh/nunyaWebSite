@@ -11,8 +11,10 @@ const HeroAboutBanner = ({ title }) => {
       <div className="md:absolute inset-0 bg-gradient-to-t from-gray-900 to-transparent z-20"></div>
       <div className="md:flex w-full">
         <div className="container mx-auto z-30">
-          <div className="max-w-md">
-            <h2 className="text-3xl mb-4">{title}</h2>
+          <div className="flex w-full justify-center items-center">
+            <h2 className="text-5xl text-white font-bold mb-4 my-14">
+              {title}
+            </h2>
           </div>
         </div>
       </div>

@@ -5,8 +5,6 @@ const Team = () => {
     <>
       <HeroAboutBanner title="Team" />
       <div className="max-w-4xl mx-auto px-4 py-8">
-        <h1 className="text-3xl font-bold mb-6">Our Team</h1>
-
         <div className="mb-8">
           <h2 className="text-2xl font-bold mb-4">Executive Team</h2>
           <ul className="list-disc pl-6">
