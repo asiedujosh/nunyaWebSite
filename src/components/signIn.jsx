@@ -1,5 +1,6 @@
 import React, { useContext, useState, useEffect } from "react"
 import { AuthApiData } from "../contextApi/auth/authContextApi"
+import { Link, useNavigate } from "react-router-dom"
 import InputField from "./inputField"
 import SignBtn from "./signBtn"
 import { SIGNIN } from "../constants/homeConstant"
@@ -95,12 +96,12 @@ const SignIn = () => {
             })}
             <div className="flex items-center justify-between">
               <SignBtn btnText={"Sign In"} action={handleLogin} />
-              <a
+              <Link
+                to="/contact"
                 className="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800"
-                href="#"
               >
                 Forgot Password?
-              </a>
+              </Link>
             </div>
           </form>
         </div>
