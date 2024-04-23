@@ -190,7 +190,7 @@ const Gameboard = () => {
                   questionInfo.subject
                 } ${"\n"}${questionInfo.examsType.toUpperCase()} ${"\n"}${
                   questionInfo.year
-                }`}</span>
+                } " "`}</span>
 
                 <span className="text-lg text-gray-500">
                   {`Question ${

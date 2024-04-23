@@ -123,17 +123,18 @@ const GameResult = ({ navigation }) => {
             <h6>Statistics</h6>
           </div>
           <div>
-            {positionReady.map((item) => (
-              <div>
-                <span>{item.topic}</span>
-                <span>
-                  {item.recurring} out of {item.totalTopic}
-                </span>
-                <span>
-                  {Math.ceil((item.recurring / item.totalTopic) * 100)}%
-                </span>
-              </div>
-            ))}
+            {topicList.length !== 0 &&
+              positionReady.map((item) => (
+                <div>
+                  <span>{item.topic}</span>
+                  <span>
+                    {item.recurring} out of {item.totalTopic}
+                  </span>
+                  <span>
+                    {Math.ceil((item.recurring / item.totalTopic) * 100)}%
+                  </span>
+                </div>
+              ))}
           </div>
           <div className="flex space-x-4">
             <span>
