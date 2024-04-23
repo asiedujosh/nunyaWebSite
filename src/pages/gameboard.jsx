@@ -1,4 +1,5 @@
 import React, { useContext, useState, useRef, useEffect } from "react"
+import { removePTags } from "../utils/pTagsRemoval"
 import { QuestionApiData } from "../contextApi/question/questionContextApi"
 import RenderOptionsContainer from "../components/renderOptionContainer"
 import { useNavigate } from "react-router-dom"
@@ -190,7 +191,7 @@ const Gameboard = () => {
                   questionInfo.subject
                 } ${"\n"}${questionInfo.examsType.toUpperCase()} ${"\n"}${
                   questionInfo.year
-                } " "`}</span>
+                } `}</span>
 
                 <span className="text-lg text-gray-500">
                   {`Question ${
@@ -208,7 +209,8 @@ const Gameboard = () => {
                       questions[currentQuestionNo].question !== "" &&
                       questions[currentQuestionNo].question !== null && (
                         <span>
-                          {questions && questions[currentQuestionNo].question}
+                          {questions &&
+                            removePTags(questions[currentQuestionNo].question)}
                         </span>
                       )}
 
