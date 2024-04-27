@@ -1,39 +1,15 @@
 import React, { useState, useEffect, useContext } from "react"
-import { useNavigate } from "react-router-dom"
+
 import { QuestionApiData } from "../contextApi/question/questionContextApi"
 
 const SubjectListContainer = () => {
-  const {
-    subjectList,
-    subjectId,
-    examId,
-    yearId,
-    setSubjectId,
-    setEntryStage,
-    processGetQuestions,
-    loadingQuestions,
-    setLoadingQuestions,
-    questions,
-  } = useContext(QuestionApiData)
-
-  const navigate = useNavigate()
-  console.log(questions)
-
-  useEffect(() => {
-    if (questions) {
-      navigate("/dashboard/gameboard")
-    } else {
-      console.log("Questions not available")
-    }
-  }, [questions])
+  const { subjectList, setEntryStage, setSubjectId } =
+    useContext(QuestionApiData)
 
   const handleSubjectSelect = (data) => {
+    setSubjectId(data)
+    setEntryStage(3)
     // setSubjectId(data)
-    processGetQuestions({
-      quizType: examId,
-      year: yearId,
-      subject: data,
-    })
   }
 
   return (

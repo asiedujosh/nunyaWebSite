@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from "react"
 import { AuthApiData } from "../contextApi/auth/authContextApi"
 import { QuestionApiData } from "../contextApi/question/questionContextApi"
+import { useNavigate } from "react-router-dom"
 import { StoreApiData } from "../contextApi/store/storeContextApi"
 import ExamListContainer from "../components/examList"
 import YearListContainer from "../components/yearList"
@@ -12,11 +13,16 @@ const Dashboard = () => {
     useContext(AuthApiData)
   const { processGetPurchase } = useContext(StoreApiData)
   const {
+    setQuestions,
+    questions,
     processGetAllExams,
     processGetAllYear,
     processGetAllSubject,
+    setEntryStage,
     entryStage,
   } = useContext(QuestionApiData)
+
+  const navigate = useNavigate()
 
   useEffect(() => {
     processGetAllExams()
@@ -25,7 +31,11 @@ const Dashboard = () => {
     processGetPurchase(userProfile && userProfile.id)
   }, [])
 
-  let handleQuizStart = () => {}
+  let handleReset = () => {
+    setEntryStage(1)
+    setQuestions()
+    navigate("/dashboard")
+  }
 
   return (
     <div
@@ -80,12 +90,21 @@ const Dashboard = () => {
       </div>
 
       <div className="bg-gray-200 lg:w-4/6" style={{ minHeight: "90vh" }}>
+        {(entryStage > 1 || questions?.length > 0) && (
+          <span
+            className="block py-4 px-6 w-full hover:bg-blue-500 cursor-pointer bg-blue-300"
+            onClick={handleReset}
+          >
+            Reset
+          </span>
+        )}
+
         <Outlet />
       </div>
       <div className="hidden md:block bg-gray-100 lg:w-1/6">
         {entryStage == "1" && <ExamListContainer />}
-        {entryStage == "2" && <YearListContainer />}
-        {entryStage == "3" && <SubjectListContainer />}
+        {entryStage == "2" && <SubjectListContainer />}
+        {entryStage == "3" && <YearListContainer />}
       </div>
     </div>
   )

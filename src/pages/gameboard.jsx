@@ -40,6 +40,12 @@ const Gameboard = () => {
   const navigate = useNavigate()
 
   useEffect(() => {
+    if (!questions) {
+      navigate("/dashboard")
+    }
+  }, [questions])
+
+  useEffect(() => {
     if (typeof window?.MathJax !== "undefined") {
       window.MathJax.typeset()
     }
@@ -188,14 +194,14 @@ const Gameboard = () => {
             <div className="flex justify-center items-center">
               <div className="">
                 <span className="text-lg text-gray-600">{`${
-                  questionInfo.subject
-                } ${"\n"}${questionInfo.examsType.toUpperCase()} ${"\n"}${
-                  questionInfo.year
+                  questionInfo?.subject
+                } ${"\n"}${questionInfo?.examsType.toUpperCase()} ${"\n"}${
+                  questionInfo?.year
                 } `}</span>
 
                 <span className="text-lg text-gray-500">
                   {`Question ${
-                    questions && questions[currentQuestionNo].questionNo
+                    questions && questions[currentQuestionNo]?.questionNo
                   }`}
                 </span>
               </div>
@@ -206,29 +212,34 @@ const Gameboard = () => {
                 <div>
                   <div className="">
                     {questions &&
-                      questions[currentQuestionNo].question !== "" &&
-                      questions[currentQuestionNo].question !== null && (
+                      questions[currentQuestionNo]?.question !== "" &&
+                      questions[currentQuestionNo]?.question !== null && (
                         <span>
-                          {questions &&
-                            removePTags(questions[currentQuestionNo].question)}
+                          {questions && (
+                            <div
+                              dangerouslySetInnerHTML={{
+                                __html: questions[currentQuestionNo]?.question,
+                              }}
+                            />
+                          )}
                         </span>
                       )}
 
                     {questions &&
-                      questions[currentQuestionNo].questionEquation !== "" &&
-                      questions[currentQuestionNo].questionEquation !==
+                      questions[currentQuestionNo]?.questionEquation !== "" &&
+                      questions[currentQuestionNo]?.questionEquation !==
                         null && (
                         <span>
-                          {questions[currentQuestionNo].questionEquation}
+                          {questions[currentQuestionNo]?.questionEquation}
                         </span>
                       )}
                   </div>
                   <div className="mt-6">
                     <RenderOptionsContainer
                       optionType={[
-                        questions[currentQuestionNo].options,
-                        questions[currentQuestionNo].imageOptions,
-                        questions[currentQuestionNo].optionsWithEquation,
+                        questions[currentQuestionNo]?.options,
+                        questions[currentQuestionNo]?.imageOptions,
+                        questions[currentQuestionNo]?.optionsWithEquation,
                       ]}
                       currentQuestion={currentQuestionNo}
                       highlight={handleChoosenAns}

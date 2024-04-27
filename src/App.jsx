@@ -11,6 +11,7 @@ import Home from "./pages/home"
 import Dashboard from "./pages/dashboard"
 import About from "./pages/about"
 import Team from "./pages/team"
+import QuestionsNotAvailable from "./pages/questionsNotAvailble"
 import TermsAndCondition from "./pages/termsAndCondition"
 import DashboardHome from "./pages/dashboardHome"
 import Gameboard from "./pages/gameboard"
@@ -44,6 +45,10 @@ function App() {
             <Route path="/dashboard" element={<DashboardHome />} />
             <Route path="/dashboard/cart" element={<Cart />} />
             <Route path="/dashboard/gameboard" element={<Gameboard />} />
+            <Route
+              path="/dashboard/questionNotAvailable"
+              element={<QuestionsNotAvailable />}
+            />
             <Route path="/dashboard/gameResult" element={<GameResult />} />
             <Route path="/dashboard/quizInfo" element={<QuizInfo />} />
             <Route path="/dashboard/records" element={<Records />} />

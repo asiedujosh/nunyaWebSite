@@ -1,13 +1,43 @@
 import React, { useState, useEffect, useContext } from "react"
+import { useNavigate } from "react-router-dom"
 import { QuestionApiData } from "../contextApi/question/questionContextApi"
 
 const YearListContainer = () => {
-  const { yearList, yearId, setYearId, setEntryStage } =
-    useContext(QuestionApiData)
+  const [start, setStart] = useState(false)
+  const {
+    yearList,
+    subjectId,
+    examId,
+    setEntryStage,
+    processGetQuestions,
+    questions,
+    loadingQuestions,
+    setLoadingQuestions,
+  } = useContext(QuestionApiData)
+
+  useEffect(() => {
+    setStart(false)
+  }, [])
+
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    if (start) {
+      if (questions?.length > 0) {
+        navigate("/dashboard/gameboard")
+      } else {
+        navigate("/dashboard/questionNotAvailable")
+      }
+    }
+  }, [questions])
 
   const handleYearSelect = (data) => {
-    setYearId(data)
-    setEntryStage(3)
+    processGetQuestions({
+      quizType: examId,
+      subject: subjectId,
+      year: data,
+    })
+    setStart((prev) => !prev)
   }
 
   return (
