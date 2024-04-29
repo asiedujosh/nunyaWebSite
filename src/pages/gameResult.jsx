@@ -127,16 +127,16 @@ const GameResult = ({ navigation }) => {
               positionReady.map((item) => (
                 <div>
                   <span>{item.topic}</span>
-                  <span>
-                    {item.recurring} out of {item.totalTopic}
+                  <span className="px-4">
+                    ({item.recurring} out of {item.totalTopic})
                   </span>
-                  <span>
+                  <span className="block text-xl">
                     {Math.ceil((item.recurring / item.totalTopic) * 100)}%
                   </span>
                 </div>
               ))}
           </div>
-          <div className="flex space-x-4">
+          <div className="flex space-x-4 my-4">
             <span>
               <SignBtn btnText="Review" action={handleGoToReview} />
             </span>

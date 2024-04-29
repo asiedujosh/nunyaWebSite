@@ -46,8 +46,10 @@ const Gameboard = () => {
   }, [questions])
 
   useEffect(() => {
-    if (typeof window?.MathJax !== "undefined") {
-      window.MathJax.typeset()
+    if (questions[currentQuestionNo].questionEquation) {
+      if (typeof window?.MathJax !== "undefined") {
+        window.MathJax.typeset()
+      }
     }
   }, [currentQuestionNo])
 
