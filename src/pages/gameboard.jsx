@@ -200,13 +200,13 @@ const Gameboard = () => {
                 } ${"\n"}${questionInfo?.examsType.toUpperCase()} ${"\n"}${
                   questionInfo?.year
                 } `}</span>
-
-                <span className="text-lg text-gray-500">
-                  {`Question ${
-                    questions && questions[currentQuestionNo]?.questionNo
-                  }`}
-                </span>
               </div>
+            </div>
+
+            <div className="text-lg text-gray-500">
+              {`Question ${
+                questions && questions[currentQuestionNo]?.questionNo
+              }`}
             </div>
 
             <div className="">

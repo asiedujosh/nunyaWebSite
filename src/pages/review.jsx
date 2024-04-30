@@ -61,8 +61,10 @@ const Review = () => {
           <h2 className="text-2xl">Records Review</h2>
           <div>
             <span>{quizAttempt.quizInfo.subject.toUpperCase()}</span>
-            <span>{quizAttempt.quizInfo.year.toUpperCase()}</span>
-            <span>
+            <span className="mx-2">
+              ({quizAttempt.quizInfo.year.toUpperCase()})
+            </span>
+            <span className="block">
               {correctAns} Out of {questions && questions.length}
             </span>
           </div>
@@ -76,9 +78,13 @@ const Review = () => {
               </span>
               <div className="mb-3">
                 <span className="block">
-                  {item.question !== "" &&
-                    item.question !== null &&
-                    item.question}
+                  {item.question !== "" && item.question !== null && (
+                    <div
+                      dangerouslySetInnerHTML={{
+                        __html: item.question,
+                      }}
+                    />
+                  )}
                 </span>
                 <span className="block">
                   {item.questionEquation !== "" &&
