@@ -1,17 +1,15 @@
 import { useContext, useEffect } from "react"
 import { AuthApiData } from "../contextApi/auth/authContextApi"
-import Navbar from "../components/navbar"
 import { useNavigate } from "react-router-dom"
+import { FloatingWhatsApp } from "react-floating-whatsapp"
 import SmallDownloadBtnContainer from "../components/smallDloadBtnContainer"
 import HeroBanner from "../components/herobanner"
 import AboutSection from "../components/AboutSection"
 import ThirdSection from "../components/ThirdSection"
 import ServiceSection from "../components/ServiceSection"
-import FourthSection from "../components/FourthSection"
-import TestimonialSection from "../components/TestimonialSection"
+
 import PaymentSection from "../components/paymentModeSection"
-import DownloadBtnContainer from "../components/downloadBtnContainer"
-import Footer from "../components/Footer"
+import logo from "../assets/logo.png"
 
 const Home = () => {
   const { alreadyLoggedIn } = useContext(AuthApiData)
@@ -36,7 +34,10 @@ const Home = () => {
       <ServiceSection />
       <ThirdSection />
       <PaymentSection />
-      <TestimonialSection />
+      <FloatingWhatsApp
+        phoneNumber="0200588522"
+        accountName="Nunya Administrator"
+      />
     </>
   )
 }

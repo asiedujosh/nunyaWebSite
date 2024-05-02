@@ -29,15 +29,17 @@ import GameResult from "./pages/gameResult"
 import Review from "./pages/review"
 import Free from "./pages/free"
 import Contact from "./pages/contact"
+import Testimonial from "./pages/testimonial"
 
 function App() {
   return (
     <div className="overflow-hidden">
-      <Router basename="/">
+      <Router>
         <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
+          <Route path="/testimonial" element={<Testimonial />} />
           <Route path="/team" element={<Team />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/termsAndCondition" element={<TermsAndCondition />} />
@@ -66,6 +68,7 @@ function App() {
             <Route path="/dashboard/faqs" element={<Faqs />} />
           </Route>
         </Routes>
+
         <Footer />
       </Router>
     </div>

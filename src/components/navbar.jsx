@@ -66,7 +66,7 @@ const Navbar = () => {
             Contact
           </Link>
           <Link
-            to="/testimony"
+            to="/testimonial"
             className="text-white  hover:text-gray-400 mr-4"
           >
             Testimonial

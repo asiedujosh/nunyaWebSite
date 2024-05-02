@@ -11,7 +11,7 @@ const ServiceSection = () => {
     <section className="bg-gray-900 text-white py-16">
       <div className="container mx-auto text-center">
         <h2 className="text-3xl font-bold mb-8">Trusted by</h2>
-        <div className="flex justify-between">
+        <div className="flex justify-between mx-6">
           <div className="flex flex-col items-center">
             <AcademicCapIcon className="w-24 h-24 mb-2" />
             <p className="text-3xl font-bold mb-2">500+</p>
