@@ -25,8 +25,8 @@ const DownloadButton = ({ store, location }) => {
           <img
             src={playStoreLogo}
             alt="Google Play Store"
-            className="h-6"
-            style={{ width: "300px", height: "120px" }}
+            className="h-4"
+            style={{ width: "200px", height: "80px" }}
           />
           <h4></h4>
         </>
@@ -35,8 +35,8 @@ const DownloadButton = ({ store, location }) => {
           <img
             src={appleStoreLogo}
             alt="App Store"
-            className="h-6"
-            style={{ width: "300px", height: "120px" }}
+            className="h-4"
+            style={{ width: "200px", height: "80px" }}
           />
         </>
       )}

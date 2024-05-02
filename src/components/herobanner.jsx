@@ -32,7 +32,7 @@ const HeroBanner = () => {
   return (
     <div
       className="relative bg-cover bg-center flex items-center"
-      style={{ backgroundImage: `url(${backgroundImage})`, height: "80vh" }}
+      style={{ backgroundImage: `url(${backgroundImage})`, height: "60vh" }}
     >
       {/* Background Image */}
       <div className="md:absolute inset-0 bg-black opacity-50 z-10"></div>

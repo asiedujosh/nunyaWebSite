@@ -33,7 +33,7 @@ import Contact from "./pages/contact"
 function App() {
   return (
     <div className="overflow-hidden">
-      <Router>
+      <Router basename="/">
         <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />
