@@ -1,15 +1,13 @@
-import { URL, TIMEOUT } from "../constant/httpConstant"
+import { URL, TIMEOUT } from "../constants/httpConstant"
 import axios from "axios"
 import { retrieveUserSession, storeUserSession } from "./localStore"
 
 const instance = axios.create({
   baseURL: URL,
   timeout: TIMEOUT,
-  withCredentials: true,
-  crossDomain: true,
-  headers: {
-    "x-Requested-with": "XMLHttpRequest",
-    Accept: "application/json",
+  config: {
+    withCredentials: true,
+    crossDomain: true,
   },
 })
 

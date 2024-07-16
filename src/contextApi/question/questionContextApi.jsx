@@ -6,6 +6,7 @@ import {
   getAllYear,
   getAllTopic,
   getSelectectedQuestions,
+  getSelectedOralQuestions,
 } from "./question"
 // import {Login, Register} from './question';
 import equationTrim from "../../utils/equationTrim"
@@ -14,17 +15,22 @@ export const QuestionApiData = createContext()
 const QuestionApiDataProvider = (props) => {
   const [examsList, setExamsList] = useState([])
   const [questionInfo, setQuestionInfo] = useState()
+  const [oralQuestionInfo, setOralQuestionInfo] = useState()
   const [quizAttempt, setQuizAttempt] = useState()
+  const [oralQuizAttempt, setOralQuizAttempt] = useState()
   const [examOptions, setExamOptions] = useState()
   const [yearOptions, setYearOptions] = useState()
   const [subjectOptions, setSubjectOptions] = useState()
   const [yearList, setYearList] = useState([])
   const [solvedQuestions, setSolvedQuestions] = useState([])
+  const [solvedOralQuestions, setSolvedOralQuestions] = useState([])
   const [review, setReview] = useState([])
+  const [oralReview, setOralReview] = useState([])
   const [subjectList, setSubjectList] = useState([])
   const [topicList, setTopicList] = useState([])
   const [loadingQuestions, setLoadingQuestions] = useState(false)
   const [questions, setQuestions] = useState()
+  const [oralQuestions, setOralQuestions] = useState()
   const [correctAns, setCorrectAns] = useState(0)
 
   // For we specific states
@@ -38,9 +44,13 @@ const QuestionApiDataProvider = (props) => {
   }, [])
 
   useEffect(() => {
-    if (questions && questions.length > 0) {
-      prepareQuestionsToBeAnswered(questions, questionInfo)
-      // console.log(questions.length);
+    try {
+      if (questions && questions.length > 0) {
+        prepareQuestionsToBeAnswered(questions, questionInfo)
+        // console.log(questions.length);
+      }
+    } catch (err) {
+      console.log(err)
     }
   }, [questions])
 
@@ -53,60 +63,88 @@ const QuestionApiDataProvider = (props) => {
   }
 
   const processExamsOptions = async (data) => {
-    let exams = ["Quiz type"]
-    data &&
-      data.map((item) => {
-        exams.push(item.exam)
-      })
-    setExamOptions(exams)
+    try {
+      let exams = ["Quiz type"]
+      data &&
+        data.map((item) => {
+          exams.push(item.exam)
+        })
+      setExamOptions(exams)
+    } catch (err) {
+      console.log(err)
+    }
   }
 
   const processGetAllYear = async () => {
-    let response = await getAllYear()
-    if (response) {
-      setYearList(response.data.data)
-      processYearOptions(response.data.data)
+    try {
+      let response = await getAllYear()
+      if (response) {
+        setYearList(response.data.data)
+        processYearOptions(response.data.data)
+      }
+    } catch (err) {
+      console.log(err)
     }
   }
 
   const processGetAllSubject = async () => {
-    let response = await getAllSubject()
-    if (response) {
-      setSubjectList(response.data.data)
-      processSubjectOptions(response.data.data)
+    try {
+      let response = await getAllSubject()
+      if (response) {
+        setSubjectList(response.data.data)
+        processSubjectOptions(response.data.data)
+      }
+    } catch (err) {
+      console.log(err)
     }
   }
 
   const processSubjectOptions = async (data) => {
-    let subjects = ["Subject"]
-    data &&
-      data.map((item) => {
-        subjects.push(item.subject)
-      })
-    setSubjectOptions(subjects)
+    try {
+      let subjects = ["Subject"]
+      data &&
+        data.map((item) => {
+          subjects.push(item.subject)
+        })
+      setSubjectOptions(subjects)
+    } catch (err) {
+      console.log(err)
+    }
   }
 
   const processYearOptions = async (data) => {
-    let years = ["Year"]
-    data &&
-      data.map((item) => {
-        years.push(item.year)
-      })
-    setYearOptions(years)
+    try {
+      let years = ["Year"]
+      data &&
+        data.map((item) => {
+          years.push(item.year)
+        })
+      setYearOptions(years)
+    } catch (err) {
+      console.log(err)
+    }
   }
 
   const processGetAllTopic = async () => {
-    let response = await getAllTopic()
-    if (response) {
-      setTopicList(response.data.data)
+    try {
+      let response = await getAllTopic()
+      if (response) {
+        setTopicList(response.data.data)
+      }
+    } catch (err) {
+      console.log(err)
     }
   }
 
   //Map Id to corresponding options
   const mapId = (item, itemList, name) => {
-    let filteredItem = itemList.filter((items) => items[name] === item)
-    return filteredItem && filteredItem[0] && filteredItem[0].id
-    // return filteredItem[0].id
+    try {
+      let filteredItem = itemList.filter((items) => items[name] === item)
+      return filteredItem && filteredItem[0] && filteredItem[0].id
+      // return filteredItem[0].id
+    } catch (err) {
+      console.log(err)
+    }
   }
 
   const processGetQuestions = async (data) => {
@@ -116,7 +154,7 @@ const QuestionApiDataProvider = (props) => {
       examType: mapId(data.quizType, examsList, "exam"),
       year: mapId(data.year, yearList, "year"),
       subject: mapId(data.subject, subjectList, "subject"),
-      questionNos: data.questionNos || 100,
+      questionNos: data.questionNos || null,
     }
 
     let info = {
@@ -126,15 +164,16 @@ const QuestionApiDataProvider = (props) => {
       timer: data.timer || null,
       questionStyle: data.questionStyle,
     }
-    console.log(formData)
+
     setQuestionInfo(info)
+
     // console.log(formData)
     let response = await getSelectectedQuestions(formData)
     if (response) {
       let questContainer = []
       //**This for website only */
-      let newData =
-        response.data &&
+
+      response.data &&
         response.data.data.map((item) => {
           if (item.questionEquation) {
             let newEquation = equationTrim(item.questionEquation)
@@ -143,11 +182,43 @@ const QuestionApiDataProvider = (props) => {
           questContainer.push(item)
         })
 
-      console.log(questContainer)
       //**End This for website only */
 
       setQuestions(questContainer)
       setLoadingQuestions(false)
+    }
+  }
+
+  const processGetOralQuestions = async (data) => {
+    try {
+      // questionStyle: data.questionStyle || null,
+      //   timer: data.timer || null,
+      let formData = {
+        examType: mapId(data.quizType, examsList, "exam"),
+        year: mapId(data.year, yearList, "year"),
+        subject: mapId(data.subject, subjectList, "subject"),
+        questionNos: data.questionNos || null,
+      }
+
+      let info = {
+        examsType: data.quizType,
+        year: data.year,
+        subject: data.subject,
+        timer: data.timer || null,
+        questionStyle: data.questionStyle,
+      }
+
+      setOralQuestionInfo(info)
+
+      // console.log(formData);
+      let response = await getSelectedOralQuestions(formData)
+      if (response) {
+        // console.log(response);
+        setOralQuestions(response.data.data)
+        setLoadingQuestions(false)
+      }
+    } catch (err) {
+      console.log(err)
     }
   }
 
@@ -188,53 +259,111 @@ const QuestionApiDataProvider = (props) => {
   }
 
   const updateQuizAttempt = (id, newData) => {
-    setQuizAttempt((prevQuizAttempt) => {
-      // Create a copy of the state
-      const updatedSolvedQuestions = [...prevQuizAttempt.solvedQuestions]
+    try {
+      setQuizAttempt((prevQuizAttempt) => {
+        // Create a copy of the state
+        const updatedSolvedQuestions = [...prevQuizAttempt.solvedQuestions]
 
-      // Find the index of the question with the given ID
-      const questionIndex = updatedSolvedQuestions.findIndex(
-        (question) => question.id === id
-      )
+        // Find the index of the question with the given ID
+        const questionIndex = updatedSolvedQuestions.findIndex(
+          (question) => question.id === id
+        )
 
-      // Update the userChoice for the found question
-      if (questionIndex !== -1) {
-        updatedSolvedQuestions[questionIndex] = {
-          ...updatedSolvedQuestions[questionIndex],
-          userChoice: newData,
+        // Update the userChoice for the found question
+        if (questionIndex !== -1) {
+          updatedSolvedQuestions[questionIndex] = {
+            ...updatedSolvedQuestions[questionIndex],
+            userChoice: newData,
+          }
         }
-      }
 
-      // Return the updated state
-      return {
-        ...prevQuizAttempt,
-        solvedQuestions: updatedSolvedQuestions,
-      }
-    })
+        // Return the updated state
+        return {
+          ...prevQuizAttempt,
+          solvedQuestions: updatedSolvedQuestions,
+        }
+      })
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
+  const updateOralQuizAttempt = (id, newData) => {
+    try {
+      setOralQuizAttempt((prevQuizAttempt) => {
+        // Create a copy of the state
+        const updatedSolvedOralQuestions = [
+          ...prevQuizAttempt.solvedOralQuestions,
+        ]
+
+        // Find the index of the question with the given ID
+        const oralQuestionIndex = updatedSolvedOralQuestions.findIndex(
+          (oralQuestion) => oralQuestion.id === id
+        )
+
+        // Update the userChoice for the found question
+        if (oralQuestionIndex !== -1) {
+          updatedSolvedOralQuestions[oralQuestionIndex] = {
+            ...updatedSolvedOralQuestions[oralQuestionIndex],
+            userChoice: newData,
+          }
+        }
+
+        // Return the updated state
+        return {
+          ...prevOralQuizAttempt,
+          solvedOralQuestions: updatedSolvedOralQuestions,
+        }
+      })
+    } catch (err) {
+      console.log(err)
+    }
   }
 
   const processQuizAttempt = (id, ans, userAns) => {
-    console.log(userAns)
-    if (userAns) {
-      if (ans.toLowerCase() === userAns.toLowerCase()) {
-        setCorrectAns((prev) => prev + 1)
+    try {
+      if (userAns) {
+        if (ans.toLowerCase() === userAns.toLowerCase()) {
+          setCorrectAns((prev) => prev + 1)
+        }
+      } else {
+        userAns = "None"
       }
-    } else {
-      userAns = "None"
-    }
 
-    updateQuizAttempt(id, userAns)
+      updateQuizAttempt(id, userAns)
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
+  const processOralQuizAttempt = (id, ans, userAns) => {
+    try {
+      if (userAns) {
+        if (ans.toLowerCase() === userAns.toLowerCase()) {
+          setCorrectAns((prev) => prev + 1)
+        } else {
+          userAns = "None"
+        }
+
+        updateOralQuizAttempt(id, userAns)
+      }
+    } catch (err) {
+      console.log(err)
+    }
   }
 
   return (
     <QuestionApiData.Provider
       value={{
+        solvedOralQuestions,
         solvedQuestions,
         setSolvedQuestions,
+        setSolvedOralQuestions,
         processGetAllYear,
         processGetAllExams,
         processGetAllSubject,
         processGetQuestions,
+        processGetOralQuestions,
         setQuestions,
         examsList,
         yearList,
@@ -242,15 +371,21 @@ const QuestionApiDataProvider = (props) => {
         yearOptions,
         examOptions,
         subjectOptions,
+        oralQuestions,
+        oralQuestionInfo,
         questions,
         questionInfo,
         loadingQuestions,
         setLoadingQuestions,
         processQuizAttempt,
+        processOralQuizAttempt,
         correctAns,
         quizAttempt,
+        oralQuizAttempt,
+        oralReview,
         review,
         setReview,
+        setOralReview,
         setCorrectAns,
         topicList,
         entryStage,

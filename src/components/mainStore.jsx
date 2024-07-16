@@ -1,14 +1,12 @@
 import { useState, useContext, useEffect } from "react"
 import { QuestionApiData } from "../contextApi/question/questionContextApi"
 import { StoreApiData } from "../contextApi/store/storeContextApi"
-import AccordionList from "./shopAccordionList"
-import {
-  Accordion,
-  AccordionItem,
-  AccordionItemHeading,
-  AccordionItemButton,
-  AccordionItemPanel,
-} from "react-accessible-accordion"
+import AccordionList from "./accordionList"
+import Accordion from "./Accordion"
+import AccordionItem from "./accordionItem"
+import AccordionItemButton from "./accordionItemButton"
+import AccordionItemHeading from "./accordionItemHeading"
+import AccordionItemPanel from "./accordionItemPanel"
 
 // Demo styles, see 'Styles' section below for some notes on use.
 import "react-accessible-accordion/dist/fancy-example.css"
@@ -30,22 +28,12 @@ const MainStore = () => {
               <AccordionItemButton>{item.exam}</AccordionItemButton>
             </AccordionItemHeading>
             <AccordionItemPanel>
-              {yearList.map((item) => (
-                <Accordion>
-                  <AccordionItem>
-                    <AccordionItemHeading>
-                      <AccordionItemButton>{item.year}</AccordionItemButton>
-                    </AccordionItemHeading>
-                    <AccordionItemPanel>
-                      <AccordionList
-                        data={itemsOnSale.filter(
-                          (item2) => item2.examId == item.id
-                        )}
-                      />
-                    </AccordionItemPanel>
-                  </AccordionItem>
-                </Accordion>
-              ))}
+              <AccordionList
+                data={
+                  itemsOnSale &&
+                  itemsOnSale.filter((item2) => item2.examId == item.id)
+                }
+              />
             </AccordionItemPanel>
           </AccordionItem>
         </Accordion>

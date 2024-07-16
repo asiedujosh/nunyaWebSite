@@ -1,3 +1,9 @@
 heroBanner {
   background: url("./assets/image/heroImage.jpg");
 }
+
+.truncate-text {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

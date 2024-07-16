@@ -11,22 +11,21 @@ import Marks from "../utils/marksNo"
 import PieChartView from "../components/pieChartView"
 import dateFormat from "../utils/dateFormat"
 
-const Analysis = () => {
+const OralAnalysis = () => {
   const { userProfile } = useContext(AuthApiData)
   const {
-    processGetUserRecords,
-    savedRecords,
+    processGetOralUserRecords,
+    oralSavedRecords,
     setReviewId,
     quizId,
     setQuizId,
   } = useContext(RecordApiData)
-  const { processGetQuestions, review } = useContext(QuestionApiData)
 
   const navigate = useNavigate()
 
   useEffect(() => {
-    if (!savedRecords) {
-      processGetUserRecords({
+    if (!oralSavedRecords) {
+      processGetOralUserRecords({
         userId: userProfile.data
           ? userProfile.data.username
           : userProfile.username,
@@ -46,9 +45,9 @@ const Analysis = () => {
   return (
     <div className="container mx-auto px-4 z-30 mt-4">
       <div className="max-w-full">
-        <h2 className="text-3xl mb-4">Analysis</h2>
-        {savedRecords &&
-          savedRecords.records.map((item) => (
+        <h2 className="text-3xl mb-4">Oral Analysis</h2>
+        {oralSavedRecords &&
+          oralSavedRecords.records.map((item) => (
             <div className="bg-white bg-opacity-75 shadow-lg p-8">
               <div className="flex items-center justify-between mb-6">
                 <h2 className="text-2xl">
@@ -61,21 +60,21 @@ const Analysis = () => {
               <div className="mb-6">
                 <PieChartView
                   pieData={[
-                    Marks(item.quizId, savedRecords.marks, "Ans"),
-                    Marks(item.quizId, savedRecords.marks, "Questions"),
+                    Marks(item.quizId, oralSavedRecords.marks, "Ans"),
+                    Marks(item.quizId, oralSavedRecords.marks, "Questions"),
                   ]}
                 />
               </div>
               <div>
                 <span>
-                  {Marks(item.quizId, savedRecords.marks, "Ans")} Out of{" "}
-                  {Marks(item.quizId, savedRecords.marks, "Questions")}
+                  {Marks(item.quizId, oralSavedRecords.marks, "Ans")} Out of{" "}
+                  {Marks(item.quizId, oralSavedRecords.marks, "Questions")}
                 </span>
                 <span>
                   <span className="block">Percentage</span>
                   {Math.ceil(
-                    (Marks(item.quizId, savedRecords.marks, "Ans") /
-                      Marks(item.quizId, savedRecords.marks, "Questions")) *
+                    (Marks(item.quizId, oralSavedRecords.marks, "Ans") /
+                      Marks(item.quizId, oralSavedRecords.marks, "Questions")) *
                       100
                   )}
                   %
@@ -96,4 +95,4 @@ const Analysis = () => {
   )
 }
 
-export default Analysis
+export default OralAnalysis

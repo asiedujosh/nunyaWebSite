@@ -1,31 +1,53 @@
-import React, {useState, createContext, useEffect} from 'react';
-import {subscribe, getAPackage} from './package';
+import React, { useState, createContext, useEffect } from "react"
+import { subscribe, getAPackage } from "./package"
 
-export const PackageApiData = createContext();
+export const PackageApiData = createContext()
 
-const PackageApiDataProvider = props => {
-  const [upgrade, setUpgrade] = useState(false);
-  const [packagePrice, setPackagePrice] = useState(null);
-  const [loading, setLoading] = useState(false);
+const PackageApiDataProvider = (props) => {
+  const [upgrade, setUpgrade] = useState(false)
+  const [packagePrice, setPackagePrice] = useState(null)
+  const [loading, setLoading] = useState(false)
+  const [confirmSubscription, setConfirmSubscription] = useState(false)
 
   useEffect(() => {
-    processGettingAPackage();
-  }, []);
+    processGettingAPackage()
+  }, [])
 
-  const processSubscribe = async data => {
-    let response = await subscribe(data);
-    if (response) {
-      setLoading(prev => !prev);
-      setUpgrade(prev => !prev);
+  const processSubscribe = async (data) => {
+    try {
+      let response = await subscribe(data)
+      if (response) {
+        setLoading((prev) => !prev)
+        setUpgrade((prev) => !prev)
+      }
+    } catch (err) {
+      console.log(err)
     }
-  };
+  }
 
   const processGettingAPackage = async () => {
-    let response = await getAPackage();
-    if (response) {
-      setPackagePrice(response.data.data);
+    try {
+      let response = await getAPackage()
+      if (response) {
+        setPackagePrice(response.data.data)
+      }
+    } catch (err) {
+      console.log(err)
     }
-  };
+  }
+
+  const processSubscribeToPackage = async (data) => {
+    try {
+      let response = await subscribeToPackage(data)
+      if (response) {
+        if (response.data.data === true) {
+          setConfirmSubscription((prev) => !prev)
+        }
+      }
+    } catch (err) {
+      console.log(err)
+    }
+  }
 
   return (
     <PackageApiData.Provider
@@ -33,13 +55,17 @@ const PackageApiDataProvider = props => {
         upgrade,
         processSubscribe,
         processGettingAPackage,
+        processSubscribeToPackage,
+        confirmSubscription,
+        setConfirmSubscription,
         packagePrice,
         loading,
         setLoading,
-      }}>
+      }}
+    >
       {props.children}
     </PackageApiData.Provider>
-  );
-};
+  )
+}
 
-export default PackageApiDataProvider;
+export default PackageApiDataProvider

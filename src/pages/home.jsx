@@ -7,9 +7,7 @@ import HeroBanner from "../components/herobanner"
 import AboutSection from "../components/AboutSection"
 import ThirdSection from "../components/ThirdSection"
 import ServiceSection from "../components/ServiceSection"
-
 import PaymentSection from "../components/paymentModeSection"
-import logo from "../assets/logo.png"
 
 const Home = () => {
   const { alreadyLoggedIn } = useContext(AuthApiData)

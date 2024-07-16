@@ -24,16 +24,7 @@ const AccordionList = ({ data, purchase }) => {
         <span>
           {subjectList.filter((item2) => item2.id == item.subjectId)[0].subject}
         </span>
-        {!purchase && <span>GHS {item.price}</span>}
       </div>
-      {!purchase && (
-        <SignBtn
-          btnText={"+ Add"}
-          action={() => {
-            addToCart(item.id)
-          }}
-        />
-      )}
     </div>
   ))
   return List

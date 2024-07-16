@@ -1,7 +1,6 @@
 export const TIMEOUT = { timeout: 150000 }
-export const URL = process.env.API_URL
-// export const URL = "https://studentappapi.awesomehandsacademy.com"
-// export const URL = "http://127.0.0.1:8000"
+// export const URL = process.env.API_URL
+export const URL = "http://127.0.0.1:8000"
 
 //System Responses
 

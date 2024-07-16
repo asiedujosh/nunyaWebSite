@@ -3,11 +3,16 @@ import { QUIZOPTIONS } from "../constants/quizConstant"
 import { useNavigate } from "react-router-dom"
 import InputField from "../components/inputField"
 import SignBtn from "../components/signBtn"
+import { AuthApiData } from "../contextApi/auth/authContextApi"
 import { StoreApiData } from "../contextApi/store/storeContextApi"
+import { SubscriptionApiData } from "../contextApi/subscription/subscriptionContextApi"
 import { QuestionApiData } from "../contextApi/question/questionContextApi"
+import { PriviledgeApiData } from "../contextApi/priviledge/priviledgeContextApi"
+import { ExamSubjectApiData } from "../contextApi/examSubjectRelation/examSubjectRelationContextApi"
 import SelectField from "../components/selectField"
 
 const QuizInfo = () => {
+  const { userProfile } = useContext(AuthApiData)
   const {
     examOptions,
     examsList,
@@ -20,7 +25,9 @@ const QuizInfo = () => {
     loadingQuestions,
     setLoadingQuestions,
   } = useContext(QuestionApiData)
-  const { purchases, freeProducts } = useContext(StoreApiData)
+  const { getExamSubjectName } = useContext(ExamSubjectApiData)
+  const { mySubscriptionList } = useContext(SubscriptionApiData)
+  const { processCheckIfUserHasPriviledge } = useContext(PriviledgeApiData)
 
   const navigate = useNavigate()
 
@@ -35,9 +42,11 @@ const QuizInfo = () => {
 
   useEffect(() => {
     if (questions) {
-      navigate("/dashboard/gameboard")
-    } else {
-      console.log("Questions not available")
+      if (questions.length > 0) {
+        navigate("/dashboard/gameboard")
+      } else {
+        navigate("/dashboard/questionNotAvailable")
+      }
     }
   }, [questions])
 
@@ -66,10 +75,91 @@ const QuizInfo = () => {
     return Option
   }
 
-  const handleSubmitQuizOptions = () => {
+  let handleNotPurchased = () => {
+    setLoadingQuestions(false)
+    navigate("/dashboard/notPurchased")
+  }
+
+  let handleNotAvailable = () => {
+    setLoadingQuestions(false)
+    navigate("/dashboard/questionNotAvailable")
+  }
+
+  let checkIfPurchasedOrFree = (data) => {
+    if (data[0].offerType !== "Paid") {
+      return true
+    } else {
+      let filteredData = mySubscriptionList.find(
+        (item) => item.examSubjectId == data[0].name
+      )
+      if (filteredData) {
+        if (filteredData.examSubjectId) {
+          return true
+        } else {
+          setLoadingQuestions(false)
+          return false
+        }
+      } else {
+        setLoadingQuestions(false)
+        return false
+      }
+    }
+  }
+
+  const handleSubmitQuizOptions = async () => {
     setLoadingQuestions(true)
-    // console.log(quizOptions)
-    processGetQuestions(quizOptions)
+    // console.log(quizOptions);
+
+    if (
+      quizOptions.quizType == examOptions[0] ||
+      quizOptions.subject == subjectOptions[0] ||
+      quizOptions.year == yearOptions[0]
+    ) {
+      setLoadingQuestions(false)
+      setFieldError((prev) => !prev)
+      console.log("Select required Info")
+    } else {
+      //Check Priviledge
+      let isPriviledge = await processCheckIfUserHasPriviledge(
+        userProfile.username
+      )
+
+      quizOptions.username = userProfile.username
+
+      if (isPriviledge == true) {
+        processGetQuestions(quizOptions)
+      } else {
+        //Get convertion
+        let examId = examsList.filter(
+          (item) => item.exam == quizOptions.quizType
+        )[0].id
+
+        let subjectId = subjectList.filter(
+          (item) => item.subject == quizOptions.subject
+        )[0].id
+
+        let entryData = {
+          examId: examId,
+          subjectId: subjectId,
+        }
+
+        // Check and get the package Id
+        let packageId = getExamSubjectName(entryData)
+
+        // Check if package name exist
+        if (packageId.length > 0) {
+          let response = checkIfPurchasedOrFree(packageId)
+          if (response == true) {
+            processGetQuestions(quizOptions)
+          } else {
+            handleNotPurchased()
+          }
+        } else {
+          handleNotAvailable()
+        }
+      }
+    }
+    // processGetQuestions(quizOptions)
   }
 
   return (

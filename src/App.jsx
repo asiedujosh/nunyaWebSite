@@ -12,6 +12,7 @@ import Dashboard from "./pages/dashboard"
 import About from "./pages/about"
 import Team from "./pages/team"
 import QuestionsNotAvailable from "./pages/questionsNotAvailble"
+import NotPurchased from "./pages/notPurchased"
 import TermsAndCondition from "./pages/termsAndCondition"
 import DashboardHome from "./pages/dashboardHome"
 import Gameboard from "./pages/gameboard"
@@ -21,6 +22,7 @@ import QuizInfo from "./pages/quiz"
 import Settings from "./pages/settings"
 import Faqs from "./pages/faqs"
 import Analysis from "./pages/analysis"
+import OralAnalysis from "./pages/oralAnalysis"
 import Cart from "./pages/cart"
 import AnalysisDetail from "./pages/analysisDetails"
 import Store from "./pages/store"
@@ -53,10 +55,12 @@ function App() {
             />
             <Route path="/dashboard/gameResult" element={<GameResult />} />
             <Route path="/dashboard/quizInfo" element={<QuizInfo />} />
+            <Route path="/dashboard/notPurchased" element={<NotPurchased />} />
             <Route path="/dashboard/records" element={<Records />} />
             <Route path="/dashboard/recordsreview" element={<RecordsView />} />
             <Route path="/dashboard/review" element={<Review />} />
             <Route path="/dashboard/analysis" element={<Analysis />} />
+            <Route path="/dashboard/oralAnalysis" element={<OralAnalysis />} />
             <Route
               path="/dashboard/analysisDetail"
               element={<AnalysisDetail />}
