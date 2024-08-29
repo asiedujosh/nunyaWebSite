@@ -46,12 +46,12 @@ const LeftSidebar = () => {
         >
           Oral Analysis
         </Link>
-        <Link
+        {/* <Link
           to="/dashboard/store"
           className="block py-4 px-4 hover:bg-gray-200 cursor-pointer border-b border-gray-300"
         >
           Store
-        </Link>
+        </Link> */}
         <Link
           to="/dashboard/settings"
           className="block py-4 px-4 hover:bg-gray-200 cursor-pointer border-b border-gray-300"

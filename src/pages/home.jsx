@@ -31,7 +31,7 @@ const Home = () => {
       <AboutSection />
       <ServiceSection />
       <ThirdSection />
-      <PaymentSection />
+      {/* <PaymentSection /> */}
       <FloatingWhatsApp
         phoneNumber="0200588522"
         accountName="Nunya Administrator"
