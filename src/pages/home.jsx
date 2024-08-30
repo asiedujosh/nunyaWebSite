@@ -26,7 +26,7 @@ const Home = () => {
     <>
       <HeroBanner />
       <div className="block my-10 md:hidden">
-        <SmallDownloadBtnContainer />
+        {/* <SmallDownloadBtnContainer /> */}
       </div>
       <AboutSection />
       <ServiceSection />
